@@ -46,6 +46,9 @@ let package = Package(
                 .product(name: "GoogleGenerativeAI", package: "generative-ai-swift"),
                 .product(name: "SwiftyNotion", package: "SwiftyNotion"),
                 .product(name: "FeedKit", package: "FeedKit"),
+            ],
+            resources: [
+                .copy("vectorstores/supabase/supabase.sql")
             ]
         
         ),
