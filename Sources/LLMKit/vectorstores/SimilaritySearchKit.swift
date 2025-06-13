@@ -11,7 +11,7 @@ import Foundation
 import SimilaritySearchKit
 import CryptoKit
 
-private struct LangChainEmbeddingBridge: EmbeddingsProtocol {
+private struct LLMKitEmbeddingBridge: EmbeddingsProtocol {
     
     var tokenizer: _T?
     
@@ -47,7 +47,7 @@ public class SimilaritySearchKit: VectorStore {
     
     public init(embeddings: Embeddings, autoLoad: Bool = false) {
         self.vs = SimilarityIndex(
-            model: LangChainEmbeddingBridge(embeddings: embeddings),
+            model: LLMKitEmbeddingBridge(embeddings: embeddings),
             metric: DotProduct()
         )
         if #available(macOS 13.0, *) {

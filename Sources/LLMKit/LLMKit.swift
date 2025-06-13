@@ -8,7 +8,7 @@
 import Foundation
 import CommonCrypto
 
-enum LangChainError: Error {
+enum LLMKitError: Error {
     case LoaderError(String)
     case ChainError
     case ToolError

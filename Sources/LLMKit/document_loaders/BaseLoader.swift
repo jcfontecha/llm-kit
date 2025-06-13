@@ -73,8 +73,8 @@ public class BaseLoader {
             cost = Date.now.timeIntervalSince1970 - now
             callEnd(type: type, reqId: reqId, cost: cost)
             return docs
-        } catch LangChainError.LoaderError(let cause) {
-            print("Catch langchain loader error \(cause)")
+        } catch LLMKitError.LoaderError(let cause) {
+            print("Catch llm-kit loader error \(cause)")
             callError(type: type, reqId: reqId, cause: cause)
             return []
         } catch {

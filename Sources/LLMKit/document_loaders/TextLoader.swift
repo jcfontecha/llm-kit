@@ -24,7 +24,7 @@ public class TextLoader: BaseLoader {
             let metadata = ["source": self.file_path]
             return [Document(page_content: text, metadata: metadata)]
         } else {
-            throw LangChainError.LoaderError("Text fail not exist")
+            throw LLMKitError.LoaderError("Text fail not exist")
         }
     }
     

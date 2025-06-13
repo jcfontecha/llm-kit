@@ -36,11 +36,11 @@ public class YoutubeLoader: BaseLoader {
                         "thumbnail": info!.thumbnail]
         var transcript_list = await YoutubeHackClient.list_transcripts(video_id: self.video_id, httpClient: httpClient)
         if transcript_list == nil {
-            throw LangChainError.LoaderError("Subtitle not exist")
+            throw LLMKitError.LoaderError("Subtitle not exist")
         }
         if transcript_list!.generated_transcripts.isEmpty && transcript_list!.manually_created_transcripts.isEmpty {
 //            return [Document(page_content: "Content is empty.", metadata: metadata)]
-            throw LangChainError.LoaderError("Subtitle not exist")
+            throw LLMKitError.LoaderError("Subtitle not exist")
         }
         var transcript = transcript_list!.find_transcript(language_codes: [self.language])
         if transcript == nil {

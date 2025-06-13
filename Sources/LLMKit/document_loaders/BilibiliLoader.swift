@@ -22,7 +22,7 @@ public class BilibiliLoader: BaseLoader {
             let client = BilibiliClient(credential: BilibiliCredential(sessin: session, jct: jct))
             let info = await client.fetchVideoInfo(bvid: videoId)
             if info == nil {
-                throw LangChainError.LoaderError("Subtitle not exist")
+                throw LLMKitError.LoaderError("Subtitle not exist")
             }
             return [Document(page_content: info!.subtitle, metadata: [
                 "title": info!.title,

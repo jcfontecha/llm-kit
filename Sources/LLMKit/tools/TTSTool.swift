@@ -32,7 +32,7 @@ public class TTSTool: BaseTool {
             let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
 
             guard let path = paths.first else {
-                throw LangChainError.ToolError
+                throw LLMKitError.ToolError
             }
 
             let url = path.appendingPathComponent("tts-\(UUID().uuidString).mp3")
@@ -42,10 +42,10 @@ public class TTSTool: BaseTool {
                 audioPlayer?.play()
                 return url.absoluteString
             } catch {
-                throw LangChainError.ToolError
+                throw LLMKitError.ToolError
             }
         } else {
-            throw LangChainError.ToolError
+            throw LLMKitError.ToolError
         }
     }
 }

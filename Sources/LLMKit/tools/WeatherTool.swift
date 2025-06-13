@@ -43,14 +43,14 @@ public class WeatherTool: BaseTool {
                 if let weather = weather {
                     return weather
                 } else {
-                    throw LangChainError.ToolError
+                    throw LLMKitError.ToolError
                 }
             } catch {
-                throw LangChainError.ToolError
+                throw LLMKitError.ToolError
             }
         } else {
             print("Please set open weather api key.")
-            throw LangChainError.ToolError
+            throw LLMKitError.ToolError
         }
     }
     

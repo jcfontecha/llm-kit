@@ -35,7 +35,7 @@ public class ImageOCRLoader: BaseLoader {
            let sk = env["BAIDU_OCR_SK"]{
             let ocr = await BaiduClient.ocrImage(ak: ak, sk: sk, httpClient: httpClient, image: image)
             if ocr!["error_msg"].string != nil {
-                throw LangChainError.LoaderError(ocr!["error_msg"].stringValue)
+                throw LLMKitError.LoaderError(ocr!["error_msg"].stringValue)
             } else {
                 let words = ocr!["words_result"].arrayValue.map{$0["words"].stringValue}
                 text = words.joined(separator: " ")

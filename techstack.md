@@ -1,7 +1,7 @@
 <!--
 &lt;--- Readme.md Snippet without images Start ---&gt;
 ## Tech Stack
-buhe/langchain-swift is built on the following main stack:
+jcfontecha/llm-kit is built on the following main stack:
 
 - [Swift](https://developer.apple.com/swift/) – Languages
 - [SQL](https://en.wikipedia.org/wiki/SQL) – Languages
@@ -13,7 +13,7 @@ Full tech stack [here](/techstack.md)
 
 &lt;--- Readme.md Snippet with images Start ---&gt;
 ## Tech Stack
-buhe/langchain-swift is built on the following main stack:
+jcfontecha/llm-kit is built on the following main stack:
 
 - <img width='25' height='25' src='https://img.stackshare.io/service/1009/tuHsaI2U.png' alt='Swift'/> [Swift](https://developer.apple.com/swift/) – Languages
 - <img width='25' height='25' src='https://img.stackshare.io/service/2271/default_068d33483bba6b81ee13fbd4dc7aab9780896a54.png' alt='SQL'/> [SQL](https://en.wikipedia.org/wiki/SQL) – Languages
@@ -26,7 +26,7 @@ Full tech stack [here](/techstack.md)
 <div align="center">
 
 # Tech Stack File
-![](https://img.stackshare.io/repo.svg "repo") [buhe/langchain-swift](https://github.com/buhe/langchain-swift)![](https://img.stackshare.io/public_badge.svg "public")
+![](https://img.stackshare.io/repo.svg "repo") [jcfontecha/llm-kit](https://github.com/jcfontecha/llm-kit)![](https://img.stackshare.io/public_badge.svg "public")
 <br/><br/>
 |4<br/>Tools used|12/14/23 <br/>Report generated|
 |------|------|

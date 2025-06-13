@@ -17,9 +17,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "LangChainTests"
-               BuildableName = "LangChainTests"
-               BlueprintName = "LangChainTests"
+               BlueprintIdentifier = "LLMKitTests"
+               BuildableName = "LLMKitTests"
+               BlueprintName = "LLMKitTests"
                ReferencedContainer = "container:">
             </BuildableReference>
          </TestableReference>

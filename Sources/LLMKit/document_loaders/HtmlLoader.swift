@@ -26,10 +26,10 @@ public class HtmlLoader: BaseLoader {
             return [Document(page_content: text, metadata: metadata)]
         } catch Exception.Error( _, let message) {
             print("Get body error " + message)
-            throw LangChainError.LoaderError("Parse html fail with \(message)")
+            throw LLMKitError.LoaderError("Parse html fail with \(message)")
         } catch {
             print("Get body error \(error)")
-            throw LangChainError.LoaderError("Parse html fail with \(error)")
+            throw LLMKitError.LoaderError("Parse html fail with \(error)")
         }
     }
     func findTitle(doc: SwiftSoup.Document) -> String {

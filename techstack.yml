@@ -1,4 +1,4 @@
-repo_name: buhe/langchain-swift
+repo_name: jcfontecha/llm-kit
 report_id: 64713165d26cff75e4a785647213e3da
 repo_type: Public
 timestamp: '2023-12-14T09:27:20+00:00'
@@ -15,7 +15,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Languages
   image_url: https://img.stackshare.io/service/2271/default_068d33483bba6b81ee13fbd4dc7aab9780896a54.png
-  detection_source: Sources/LangChain/vectorstores/supabase/supabase.sql
+  detection_source: Sources/LLMKit/vectorstores/supabase/supabase.sql
   last_updated_by: buhe
   last_updated_on: 2023-06-14 09:04:42.000000000 Z
 - name: Swift

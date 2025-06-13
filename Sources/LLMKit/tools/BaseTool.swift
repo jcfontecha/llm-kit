@@ -8,7 +8,7 @@
 import Foundation
 
 public protocol Tool {
-    // Interface LangChain tools must implement.
+    // Interface LLMKit tools must implement.
     
     func name() -> String
     // The unique name of the tool that clearly communicates its purpose.

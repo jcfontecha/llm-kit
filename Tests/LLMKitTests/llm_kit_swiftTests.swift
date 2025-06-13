@@ -1,11 +1,11 @@
 import XCTest
-@testable import LangChain
+@testable import LLMKit
 import AsyncHTTPClient
 import Foundation
 import NIOPosix
 
 
-final class langchain_swiftTests: XCTestCase {
+final class llm_kit_swiftTests: XCTestCase {
     func testFormat() throws {
         // XCTest Documentation
         // https://developer.apple.com/documentation/xctest

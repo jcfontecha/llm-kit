@@ -81,7 +81,7 @@ public class DefaultChain {
             let _ = prep_outputs(inputs: [inputKey: args], outputs: [self.outputKey: llmResult.llm_output!])
             return outputs.1
         } else {
-            callCatch(error: LangChainError.ChainError, reqId: reqId, cost: cost)
+            callCatch(error: LLMKitError.ChainError, reqId: reqId, cost: cost)
             return Parsed.error
         }
     }

@@ -1,8 +1,8 @@
 ![](https://p.ipic.vip/2qqnzz.png)
-# 🐇 LangChain Swift
-[![Swift](https://github.com/buhe/langchain-swift/actions/workflows/swift.yml/badge.svg)](https://github.com/buhe/langchain-swift/actions/workflows/swift.yml) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) ![Swift Package Manager](https://img.shields.io/badge/SwiftPM-compatible-brightgreen.svg) [![Twitter](https://img.shields.io/badge/twitter-@buhe1986-blue.svg?style=flat)](http://twitter.com/buhe1986)
+# 🐇 LLMKit Swift
+[![Swift](https://github.com/jcfontecha/llm-kit/actions/workflows/swift.yml/badge.svg)](https://github.com/jcfontecha/llm-kit/actions/workflows/swift.yml) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) ![Swift Package Manager](https://img.shields.io/badge/SwiftPM-compatible-brightgreen.svg) [![Twitter](https://img.shields.io/badge/twitter-@buhe1986-blue.svg?style=flat)](http://twitter.com/buhe1986)
 
-🚀 LangChain for Swift. Optimized for iOS, macOS, watchOS (part) and visionOS.(beta)
+🚀 LLMKit for Swift. Optimized for iOS, macOS, watchOS (part) and visionOS.(beta)
 
 This is a pure client library, no server required
 
@@ -55,7 +55,7 @@ Please use 'local' branch, because of dependency on projects.
 [Model here](https://github.com/guinmoon/LLMFarm/blob/main/models.md)
  
  ```
-  .package(url: "https://github.com/buhe/langchain-swift", .branch("local"))
+  .package(url: "https://github.com/jcfontecha/llm-kit", .branch("local"))
  ```
 Code
 
@@ -127,7 +127,7 @@ Desktop  Documents  Downloads  Music  Pictures  Public  Templates  Videos
 <details>
 <summary>❓ QA bot</summary>
     
-An [main/Sources/LangChain/vectorstores/supabase/supabase.sql](https://github.com/buhe/langchain-swift/blob/main/Sources/LangChain/vectorstores/supabase/supabase.sql) is required.
+An [main/Sources/LLMKit/vectorstores/supabase/supabase.sql](https://github.com/jcfontecha/llm-kit/blob/main/Sources/LLMKit/vectorstores/supabase/supabase.sql) is required.
 
 ref: https://supabase.com/docs/guides/database/extensions/pgvector
 
@@ -155,7 +155,7 @@ Task(priority: .background)  {
 Log
 ```
 Q🖥️:What did the president say about Ketanji Brown Jackson
-A🚀:[LangChain.MatchedModel(content: Optional("In state after state, new laws have been passed, not only to suppress the vote, but to subvert entire elections. We cannot let this happen. Tonight. I call on the Senate to: Pass the Freedom to Vote Act. Pass the John Lewis Voting Rights Act. And while you’re at it, pass the Disclose Act so Americans can know who is funding our elections. Tonight, I’d like to honor someone who has dedicated his life to serve this country: Justice Stephen Breyer—an Army veteran, Constitutional scholar, and retiring Justice of the United States Supreme Court. Justice Breyer, thank you for your service. One of the most serious constitutional responsibilities a President has is nominating someone to serve on the United States Supreme Court. And I did that 4 days ago, when I nominated Circuit Court of Appeals Judge Ketanji Brown Jackson. One of our nation’s top legal minds, who will continue Justice Breyer’s legacy of excellence. "), similarity: 0.8024642)]
+A🚀:[LLMKit.MatchedModel(content: Optional("In state after state, new laws have been passed, not only to suppress the vote, but to subvert entire elections. We cannot let this happen. Tonight. I call on the Senate to: Pass the Freedom to Vote Act. Pass the John Lewis Voting Rights Act. And while you’re at it, pass the Disclose Act so Americans can know who is funding our elections. Tonight, I’d like to honor someone who has dedicated his life to serve this country: Justice Stephen Breyer—an Army veteran, Constitutional scholar, and retiring Justice of the United States Supreme Court. Justice Breyer, thank you for your service. One of the most serious constitutional responsibilities a President has is nominating someone to serve on the United States Supreme Court. And I did that 4 days ago, when I nominated Circuit Court of Appeals Judge Ketanji Brown Jackson. One of our nation’s top legal minds, who will continue Justice Breyer’s legacy of excellence. "), similarity: 0.8024642)]
 ```
 </details>
 <details>
@@ -394,7 +394,7 @@ Task(priority: .background)  {
 <img src="https://www.buhe.dev/_next/image?url=%2Fassets%2FWriter.png&w=256&q=75" alt="帮你写作文" style="width:15%">
 </a>
 
-[Open an issue or PR to add your app.](https://github.com/buhe/langchain-swift/issues/new)
+[Open an issue or PR to add your app.](https://github.com/jcfontecha/llm-kit/issues/new)
 
 ## 🚗 Roadmap
 - LLMs
@@ -483,7 +483,7 @@ Task(priority: .background)  {
 ## 👍 Got Ideas?
 Open an issue, and let's discuss!
 
-Join Slack: [https://join.slack.com/t/langchain-mobile/shared_invite/zt-26tzdzb2u-8RnP7hDQz~MWMg8EeIu0lQ
-](https://join.slack.com/t/langchain-mobile/shared_invite/zt-2ajo39zxx-db9e_nbJcADTkGeB33PF7g)
+Join Slack: [https://join.slack.com/t/llm-kit-mobile/shared_invite/zt-26tzdzb2u-8RnP7hDQz~MWMg8EeIu0lQ
+](https://join.slack.com/t/llm-kit-mobile/shared_invite/zt-2ajo39zxx-db9e_nbJcADTkGeB33PF7g)
 ## 💁 Contributing
 As an open-source project in a rapidly developing field, we are extremely open to contributions, whether it be in the form of a new feature, improved infrastructure, or better documentation.

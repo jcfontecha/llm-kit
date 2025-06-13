@@ -66,11 +66,11 @@ public class AudioLoader: BaseLoader {
                         docs.append(doc)
                     } catch {
                         print("Unable to load data: \(error)")
-                        throw LangChainError.LoaderError("Unable to load data: \(error)")
+                        throw LLMKitError.LoaderError("Unable to load data: \(error)")
                     }
                    
                 } else {
-                    throw LangChainError.LoaderError("Not split audio")
+                    throw LLMKitError.LoaderError("Not split audio")
                 }
             }
             return docs

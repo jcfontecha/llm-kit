@@ -41,10 +41,10 @@ public class PDFLoader: BaseLoader {
     //            print(extractedText)
                 return [Document(page_content: extractedText, metadata: metadata)]
             } else{
-                throw LangChainError.LoaderError("Parse PDF file fail.")
+                throw LLMKitError.LoaderError("Parse PDF file fail.")
             }
 //        } else {
-//            throw LangChainError.LoaderError("PDF not exist")
+//            throw LLMKitError.LoaderError("PDF not exist")
 //        }
     }
     
