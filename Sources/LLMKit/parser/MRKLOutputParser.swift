@@ -15,7 +15,10 @@ public struct MRKLOutputParser: BaseOutputParser {
             return Parsed.finish(AgentFinish(final: text))
         }
         let pattern = "Action\\s*:[\\s]*(.*)[\\s]*Action\\s*Input\\s*:[\\s]*(.*)"
-        let regex = try! NSRegularExpression(pattern: pattern)
+        guard let regex = try? NSRegularExpression(pattern: pattern) else {
+            print("❌ Invalid regex pattern: \(pattern)")
+            return Parsed.error
+        }
         
         if let match = regex.firstMatch(in: text, options: [], range: NSRange(location: 0, length: text.utf16.count)) {
             
@@ -25,7 +28,11 @@ public struct MRKLOutputParser: BaseOutputParser {
             
             let secondCaptureGroup = Range(match.range(at: 2), in: text).map { String(text[$0]) }
 //            print(secondCaptureGroup!)
-            return Parsed.action(AgentAction(action: firstCaptureGroup!, input: secondCaptureGroup!, log: text))
+            guard let action = firstCaptureGroup, let input = secondCaptureGroup else {
+                print("❌ Failed to extract action or input from match")
+                return Parsed.error
+            }
+            return Parsed.action(AgentAction(action: action, input: input, log: text))
         } else {
             return Parsed.error
         }

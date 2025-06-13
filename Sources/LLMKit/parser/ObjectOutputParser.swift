@@ -25,8 +25,18 @@ public struct ObjectOutputParser<T: Codable>: BaseOutputParser {
 """
     
     public func parse(text: String) -> Parsed {
-        let r = try! JSONDecoder().decode(T.self, from: text.data(using: .utf8)!)
-        return Parsed.object(r)
+        guard let data = text.data(using: .utf8) else {
+            print("❌ Failed to convert text to UTF-8 data")
+            return Parsed.error
+        }
+        
+        do {
+            let r = try JSONDecoder().decode(T.self, from: data)
+            return Parsed.object(r)
+        } catch {
+            print("❌ Failed to decode JSON: \(error.localizedDescription)")
+            return Parsed.error
+        }
     }
     fileprivate func isPrimitive(_ t: String) -> Bool {
         return t == "Int" || t == "String" || t == "Double" || t == "Float" || t == "Bool"
@@ -39,7 +49,8 @@ public struct ObjectOutputParser<T: Codable>: BaseOutputParser {
             let t = "\(type(of: value))"
 //            print("type: \(t)")
             if isPrimitive(t) {
-                let s = "\(name!): \(t)"
+                guard let name = name else { continue }
+                let s = "\(name): \(t)"
                 schema += "\(s),"
 //                print(s)
             } else if t.starts(with: "Array<") {

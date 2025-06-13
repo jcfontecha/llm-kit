@@ -117,7 +117,10 @@ public class AgentExecutor: DefaultChain {
         case .finish(let finish):
             return (step, finish.final)
         case .action(let action):
-            let tool = tools.filter{$0.name() == action.action}.first!
+            guard let tool = tools.filter{$0.name() == action.action}.first else {
+                print("❌ Tool '\(action.action)' not found!")
+                return (step, "Error: Tool '\(action.action)' not found. Available tools: \(tools.map { $0.name() }.joined(separator: ", "))")
+            }
             do {
                 print("try call \(tool.name()) tool.")
                 var observation = try await tool.run(args: action.input)
@@ -127,8 +130,12 @@ public class AgentExecutor: DefaultChain {
                 return (step, observation)
             } catch {
                 print("\(error.localizedDescription) at run \(tool.name()) tool.")
-                let observation = try! await InvalidTool(toolName: tool.name()).run(args: action.input)
-                return (step, observation)
+                do {
+                    let observation = try await InvalidTool(toolName: tool.name()).run(args: action.input)
+                    return (step, observation)
+                } catch {
+                    return (step, "Error: Failed to execute tool and fallback InvalidTool: \(error.localizedDescription)")
+                }
             }
         default:
             return (step, "fail")
