@@ -55,7 +55,7 @@ Please use 'local' branch, because of dependency on projects.
 [Model here](https://github.com/guinmoon/LLMFarm/blob/main/models.md)
  
  ```
-  .package(url: "https://github.com/jcfontecha/llm-kit", .branch("local"))
+  .package(url: "https://github.com/jcfontecha/llm-kit", .branch("main"))
  ```
 Code
 
