@@ -67,12 +67,12 @@ public class NotionLoader: BaseLoader {
             }
         }
         if foundDoc {
-            docs.append(Document(page_content: content, metadata: ["title": title]))
+            docs.append(Document(pageContent: content, metadata: ["title": title]))
         }
         return docs
     }
     
-    public override func _load() async throws -> [Document] {
+    public override func loadDocuments() async throws -> [Document] {
         let env = LC.loadEnv()
         
         if let apiKey = env["NOTION_API_KEY"], let rootId = env["NOTION_ROOT_NODE_ID"] {

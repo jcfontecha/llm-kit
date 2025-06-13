@@ -11,7 +11,7 @@ import NIOPosix
 import SwiftyJSON
 
 public struct TranscriptList {
-    let video_id: String
+    let videoId: String
     var manually_created_transcripts: [String: Transcript]
     let generated_transcripts: [String: Transcript]
     let translation_languages: [[String : String]]
@@ -43,7 +43,7 @@ public struct TranscriptList {
         }
         return nil
     }
-    static func build(http_client: HTTPClient, video_id: String, captions_json: JSON?) -> TranscriptList? {
+    static func build(http_client: HTTPClient, videoId: String, captions_json: JSON?) -> TranscriptList? {
         if captions_json == nil {
             return nil
         }
@@ -58,10 +58,10 @@ public struct TranscriptList {
         for caption in captions_json!["captionTracks"].arrayValue {
             if caption["kind"].exists() {
                 generated_transcripts[caption["languageCode"].stringValue] = Transcript(
-                    http_client: http_client, video_id: video_id, url: caption["baseUrl"].stringValue, language: caption["name"]["simpleText"].stringValue, language_code: caption["languageCode"].stringValue, is_generated: caption["kind"].exists() && caption["kind"].stringValue == "asr" , translation_languages: caption["isTranslatable"].exists() ? translation_languages:[]
+                    http_client: http_client, videoId: videoId, url: caption["baseUrl"].stringValue, language: caption["name"]["simpleText"].stringValue, language_code: caption["languageCode"].stringValue, is_generated: caption["kind"].exists() && caption["kind"].stringValue == "asr" , translation_languages: caption["isTranslatable"].exists() ? translation_languages:[]
                 )
                     //                      http_client,
-                    //                      video_id,
+                    //                      videoId,
                     //                      caption['baseUrl'],
                     //                      caption['name']['simpleText'],
                     //                      caption['languageCode'],
@@ -70,7 +70,7 @@ public struct TranscriptList {
                     //                  )
             } else {
                 manually_created_transcripts[caption["languageCode"].stringValue] = Transcript(
-                    http_client: http_client, video_id: video_id, url: caption["baseUrl"].stringValue, language: caption["name"]["simpleText"].stringValue, language_code: caption["languageCode"].stringValue, is_generated: caption["kind"].exists() && caption["kind"].stringValue == "asr" , translation_languages: caption["isTranslatable"].exists() ? translation_languages:[]
+                    http_client: http_client, videoId: videoId, url: caption["baseUrl"].stringValue, language: caption["name"]["simpleText"].stringValue, language_code: caption["languageCode"].stringValue, is_generated: caption["kind"].exists() && caption["kind"].stringValue == "asr" , translation_languages: caption["isTranslatable"].exists() ? translation_languages:[]
                 )
             }
         }
@@ -92,7 +92,7 @@ public struct TranscriptList {
 //
 //                  transcript_dict[caption['languageCode']] = Transcript(
 //                      http_client,
-//                      video_id,
+//                      videoId,
 //                      caption['baseUrl'],
 //                      caption['name']['simpleText'],
 //                      caption['languageCode'],
@@ -101,21 +101,21 @@ public struct TranscriptList {
 //                  )
 //
 //              return TranscriptList(
-//                  video_id,
+//                  videoId,
 //                  manually_created_transcripts,
 //                  generated_transcripts,
 //                  translation_languages,
 //              )
-        return TranscriptList(video_id: video_id, manually_created_transcripts: manually_created_transcripts, generated_transcripts: generated_transcripts, translation_languages: translation_languages)
+        return TranscriptList(videoId: videoId, manually_created_transcripts: manually_created_transcripts, generated_transcripts: generated_transcripts, translation_languages: translation_languages)
     }
-//    def build(http_client, video_id, captions_json):
+//    def build(http_client, videoId, captions_json):
 //            """
 //            Factory method for TranscriptList.
 //
 //            :param http_client: http client which is used to make the transcript retrieving http calls
 //            :type http_client: requests.Session
-//            :param video_id: the id of the video this TranscriptList is for
-//            :type video_id: str
+//            :param videoId: the id of the video this TranscriptList is for
+//            :type videoId: str
 //            :param captions_json: the JSON parsed from the YouTube pages static HTML
 //            :type captions_json: dict
 //            :return: the created TranscriptList
@@ -139,7 +139,7 @@ public struct TranscriptList {
 //
 //                transcript_dict[caption['languageCode']] = Transcript(
 //                    http_client,
-//                    video_id,
+//                    videoId,
 //                    caption['baseUrl'],
 //                    caption['name']['simpleText'],
 //                    caption['languageCode'],
@@ -148,7 +148,7 @@ public struct TranscriptList {
 //                )
 //
 //            return TranscriptList(
-//                video_id,
+//                videoId,
 //                manually_created_transcripts,
 //                generated_transcripts,
 //                translation_languages,

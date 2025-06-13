@@ -50,7 +50,7 @@ public class ChatOllama: Ollama {
         }
         let llmResponse = try JSONDecoder().decode(ChatResponse.self, from: data)
         history.append(llmResponse.message)
-        return LLMResult(llm_output: llmResponse.message.content)
+        return LLMResult(llmOutput: llmResponse.message.content)
     }
 }
 

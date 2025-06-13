@@ -23,7 +23,7 @@ public class AudioLoader: BaseLoader {
         super.init(callbacks: callbacks)
     }
     
-    public override func _load() async throws -> [Document] {
+    public override func loadDocuments() async throws -> [Document] {
         var docs: [Document] = []
         
         let asset: AVAsset = AVAsset(url: audio)
@@ -52,7 +52,7 @@ public class AudioLoader: BaseLoader {
 //            do {
 //                let data = try Data(contentsOf: audio)
 //                let completion = try! await openAIClient.audio.transcribe(file: data, fileName: "\(fileName)", mimeType: .m4a)
-//                let doc = Document(page_content: completion.text, metadata: ["fileName": "\(fileName)", "mimeType": "m4a"])
+//                let doc = Document(pageContent: completion.text, metadata: ["fileName": "\(fileName)", "mimeType": "m4a"])
 //                docs.append(doc)
 //            } catch {
 //                print("Unable to load data: \(error)")
@@ -62,7 +62,7 @@ public class AudioLoader: BaseLoader {
                     do {
                         let data = try Data(contentsOf: url)
                         let completion = try! await openAIClient.audio.transcribe(file: data, fileName: "\(fileName)_\(index).m4a", mimeType: .m4a)
-                        let doc = Document(page_content: completion.text, metadata: ["fileName": "\(fileName)_\(index)", "mimeType": "m4a"])
+                        let doc = Document(pageContent: completion.text, metadata: ["fileName": "\(fileName)_\(index)", "mimeType": "m4a"])
                         docs.append(doc)
                     } catch {
                         print("Unable to load data: \(error)")

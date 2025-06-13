@@ -29,7 +29,7 @@ public class JavascriptREPLTool: BaseTool {
 """
     }
     
-    public override func _run(args: String) async throws -> String {
+    public override func execute(args: String) async throws -> String {
         let jsResult = context.evaluateScript(args)
         if jsResult != nil {
             return (jsResult?.toString())!

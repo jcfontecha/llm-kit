@@ -55,7 +55,7 @@ struct WikipediaAPIWrapper {
         var docs: [Document] = []
         for page in pages {
             let content = try await page.content()
-            docs.append(Document(page_content: content, metadata: [:]))
+            docs.append(Document(pageContent: content, metadata: [:]))
         }
         return docs
     }

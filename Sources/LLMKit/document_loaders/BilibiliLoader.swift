@@ -15,7 +15,7 @@ public class BilibiliLoader: BaseLoader {
         super.init(callbacks: callbacks)
     }
         
-    public override func _load() async throws -> [Document] {
+    public override func loadDocuments() async throws -> [Document] {
         let env = LC.loadEnv()
         
         if let session = env["BILIBILI_SESSION"], let jct = env["BILIBILI_JCT"] {
@@ -24,7 +24,7 @@ public class BilibiliLoader: BaseLoader {
             if info == nil {
                 throw LLMKitError.LoaderError("Subtitle not exist")
             }
-            return [Document(page_content: info!.subtitle, metadata: [
+            return [Document(pageContent: info!.subtitle, metadata: [
                 "title": info!.title,
                 "desc": info!.desc,
                 "thumbnail": info!.thumbnail.replacingOccurrences(of: "http", with: "https")

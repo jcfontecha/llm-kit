@@ -59,7 +59,7 @@ public class FileCache: BaseCache {
                 
                 let cache = try await objectStore!.read(key: base64.sha256(), namespace: "llm_cache", objectType: LLMCache.self)
                 if let c = cache {
-                    return LLMResult(llm_output: c.value)
+                    return LLMResult(llmOutput: c.value)
                 }
             }
             return nil
@@ -75,7 +75,7 @@ public class FileCache: BaseCache {
         do {
             if let data = prompt.data(using: .utf8) {
                 let base64 = data.base64EncodedString()
-                let cache = LLMCache(key: prompt, value: return_val.llm_output!)
+                let cache = LLMCache(key: prompt, value: return_val.llmOutput!)
                 try await objectStore!.write(key: base64.sha256(), namespace: "llm_cache", object: cache)
             }
         } catch {

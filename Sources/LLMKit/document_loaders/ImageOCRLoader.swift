@@ -22,7 +22,7 @@ public class ImageOCRLoader: BaseLoader {
         super.init(callbacks: callbacks)
     }
     
-    public override func _load() async throws -> [Document] {
+    public override func loadDocuments() async throws -> [Document] {
         let eventLoopGroup = ThreadManager.thread
         let httpClient = HTTPClient(eventLoopGroupProvider: .shared(eventLoopGroup))
         defer {
@@ -39,7 +39,7 @@ public class ImageOCRLoader: BaseLoader {
             } else {
                 let words = ocr!["words_result"].arrayValue.map{$0["words"].stringValue}
                 text = words.joined(separator: " ")
-                return [Document(page_content: text, metadata: [:])]
+                return [Document(pageContent: text, metadata: [:])]
             }
         } else {
             return []

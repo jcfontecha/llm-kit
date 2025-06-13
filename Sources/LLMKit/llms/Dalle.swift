@@ -33,10 +33,10 @@ public class Dalle: LLM {
 
             let openAIClient = OpenAIKit.Client(httpClient: httpClient, configuration: configuration)
             let reps = try await openAIClient.images.create(prompt: text, size: dalleTo(size: size))
-            return LLMResult(llm_output: reps.data.first!.url)
+            return LLMResult(llmOutput: reps.data.first!.url)
         } else {
             print("Please set openai api key.")
-            return LLMResult(llm_output: "Please set openai api key.")
+            return LLMResult(llmOutput: "Please set openai api key.")
         }
         
     }

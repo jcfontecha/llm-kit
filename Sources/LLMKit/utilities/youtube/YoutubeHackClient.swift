@@ -11,11 +11,11 @@ import NIOPosix
 
 public struct YoutubeHackClient {
     
-    public static func list_transcripts(video_id: String, httpClient: HTTPClient) async -> TranscriptList? {
-        return await TranscriptListFetcher(http_client: httpClient).fetch(video_id: video_id)
+    public static func list_transcripts(videoId: String, httpClient: HTTPClient) async -> TranscriptList? {
+        return await TranscriptListFetcher(http_client: httpClient).fetch(videoId: videoId)
     }
     
-    public static func info(video_id: String, httpClient: HTTPClient) async -> YoutubeInfo? {
-        return await YoutubeInfoFetcher().fetch(http_client: httpClient, video_id: video_id)
+    public static func info(videoId: String, httpClient: HTTPClient) async -> YoutubeInfo? {
+        return await YoutubeInfoFetcher().fetch(http_client: httpClient, videoId: videoId)
     }
 }

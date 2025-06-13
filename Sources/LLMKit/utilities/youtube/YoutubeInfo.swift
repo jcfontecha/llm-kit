@@ -11,10 +11,10 @@ import NIOPosix
 import SwiftyJSON
 
 struct YoutubeInfoFetcher {
-    func fetch(http_client: HTTPClient, video_id: String) async -> YoutubeInfo? {
+    func fetch(http_client: HTTPClient, videoId: String) async -> YoutubeInfo? {
         let url = "https://www.youtube.com/youtubei/v1/player?key=AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8"
         
-        let requestBody = YoutubeInfoRequest(videoId: video_id, context: YoutubeInfoRequestContext(client: YoutubeInfoRequestContextClient(clientName: "WEB", clientVersion: "2.20210721.00.00")))
+        let requestBody = YoutubeInfoRequest(videoId: videoId, context: YoutubeInfoRequestContext(client: YoutubeInfoRequestContextClient(clientName: "WEB", clientVersion: "2.20210721.00.00")))
         do {
             var request = HTTPClientRequest(url: url)
             request.method = .POST

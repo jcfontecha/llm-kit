@@ -26,7 +26,7 @@ public class HuggingFace: LLM {
         if !stops.isEmpty {
             result2 = result2.components(separatedBy: stops[0])[0]
         }
-        return LLMResult(llm_output: result2)
+        return LLMResult(llmOutput: result2)
     }
     
 }

@@ -10,10 +10,10 @@ import Foundation
 
 
 public class InvalidTool: BaseTool {
-    let tool_name: String
+    let toolName: String
     
-    public init(tool_name: String) {
-        self.tool_name = tool_name
+    public init(toolName: String) {
+        self.toolName = toolName
     }
     
     public override func name() -> String {
@@ -24,8 +24,8 @@ public class InvalidTool: BaseTool {
         "Called when tool name is invalid."
     }
     
-    public override func _run(args: String) async throws -> String {
-        "\(tool_name) is not a valid tool, try another one."
+    public override func execute(args: String) async throws -> String {
+        "\(toolName) is not a valid tool, try another one."
     }
     
     

@@ -28,7 +28,7 @@
 //        let output = try? ai.model.predict(text, mainCallback)
 ////        print("🚗\(output)")
 //        total_output = 0
-//        return LLMResult(llm_output: output)
+//        return LLMResult(llmOutput: output)
 //    }
 //    
 //    let maxOutputLength = 256

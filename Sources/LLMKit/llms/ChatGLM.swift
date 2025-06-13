@@ -9,7 +9,7 @@ import Foundation
 
 public class ChatGLM: LLM {
     public override func _send(text: String, stops: [String]) async throws -> LLMResult {
-        return LLMResult(llm_output: try await api.call(text: text))
+        return LLMResult(llmOutput: try await api.call(text: text))
     }
     
     let api: ChatGLMAPIWrapper

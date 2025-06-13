@@ -19,13 +19,13 @@ struct TranscriptListFetcher {
         self.http_client = http_client
     }
     
-    func fetch(video_id: String) async -> TranscriptList? {
+    func fetch(videoId: String) async -> TranscriptList? {
         return await TranscriptList.build(http_client:
-                    self.http_client, video_id: video_id, captions_json: self._extract_captions_json(html: self._fetch_video_html(video_id: video_id), video_id: video_id)
+                    self.http_client, videoId: videoId, captions_json: self._extract_captions_json(html: self._fetch_video_html(videoId: videoId), videoId: videoId)
                 )
     }
     
-    func _extract_captions_json(html: String, video_id: String) async -> JSON? {
+    func _extract_captions_json(html: String, videoId: String) async -> JSON? {
         let splitted_html = html.components(separatedBy: "\"captions\":")
         if splitted_html.count != 2 {
             return nil
@@ -39,50 +39,50 @@ struct TranscriptListFetcher {
         let captions_json = json["playerCaptionsTracklistRenderer"]
         return captions_json
     }
-//    def _extract_captions_json(self, html, video_id):
+//    def _extract_captions_json(self, html, videoId):
 //           splitted_html = html.split('"captions":')
 //
 //           if len(splitted_html) <= 1:
-//               if video_id.startswith('http://') or video_id.startswith('https://'):
-//                   raise InvalidVideoId(video_id)
+//               if videoId.startswith('http://') or videoId.startswith('https://'):
+//                   raise InvalidVideoId(videoId)
 //               if 'class="g-recaptcha"' in html:
-//                   raise TooManyRequests(video_id)
+//                   raise TooManyRequests(videoId)
 //               if '"playabilityStatus":' not in html:
-//                   raise VideoUnavailable(video_id)
+//                   raise VideoUnavailable(videoId)
 //
-//               raise TranscriptsDisabled(video_id)
+//               raise TranscriptsDisabled(videoId)
 //
 //           captions_json = json.loads(
 //               splitted_html[1].split(',"videoDetails')[0].replace('\n', '')
 //           ).get('playerCaptionsTracklistRenderer')
 //           if captions_json is None:
-//               raise TranscriptsDisabled(video_id)
+//               raise TranscriptsDisabled(videoId)
 //
 //           if 'captionTracks' not in captions_json:
-//               raise NoTranscriptAvailable(video_id)
+//               raise NoTranscriptAvailable(videoId)
 //
 //           return captions_json
     
-//    def _fetch_video_html(self, video_id):
-//          html = self._fetch_html(video_id)
+//    def _fetch_video_html(self, videoId):
+//          html = self._fetch_html(videoId)
 //          if 'action="https://consent.youtube.com/s"' in html:
-//              self._create_consent_cookie(html, video_id)
-//              html = self._fetch_html(video_id)
+//              self._create_consent_cookie(html, videoId)
+//              html = self._fetch_html(videoId)
 //              if 'action="https://consent.youtube.com/s"' in html:
-//                  raise FailedToCreateConsentCookie(video_id)
+//                  raise FailedToCreateConsentCookie(videoId)
 //          return html
 //
-//      def _fetch_html(self, video_id):
-//          response = self._http_client.get(WATCH_URL.format(video_id=video_id), headers={'Accept-Language': 'en-US'})
-//          return unescape(_raise_http_errors(response, video_id).text)
-    func _fetch_video_html(video_id: String) async -> String {
-        let html = await self._fetch_html(video_id: video_id)
+//      def _fetch_html(self, videoId):
+//          response = self._http_client.get(WATCH_URL.format(videoId=videoId), headers={'Accept-Language': 'en-US'})
+//          return unescape(_raise_http_errors(response, videoId).text)
+    func _fetch_video_html(videoId: String) async -> String {
+        let html = await self._fetch_html(videoId: videoId)
         return html
     }
     
-    func _fetch_html(video_id: String) async -> String {
+    func _fetch_html(videoId: String) async -> String {
         do {
-            var request = HTTPClientRequest(url: String(format: WATCH_URL, video_id))
+            var request = HTTPClientRequest(url: String(format: WATCH_URL, videoId))
             request.method = .GET
             request.headers.add(name: "Accept-Language", value: "en-US")
 

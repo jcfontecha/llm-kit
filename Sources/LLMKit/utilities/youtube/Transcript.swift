@@ -12,16 +12,16 @@ import SWXMLHash
 
 struct Transcript {
     let http_client: HTTPClient
-    let video_id: String
+    let videoId: String
     let url: String
     let language: String
     let language_code: String
     let is_generated: Bool
     let translation_languages: [[String: String]]
     var translation_languages_dict: [String: String]
-    init(http_client: HTTPClient, video_id: String, url: String, language: String, language_code: String, is_generated: Bool, translation_languages: [[String : String]]) {
+    init(http_client: HTTPClient, videoId: String, url: String, language: String, language_code: String, is_generated: Bool, translation_languages: [[String : String]]) {
         self.http_client = http_client
-        self.video_id = video_id
+        self.videoId = videoId
         self.url = url
         self.language = language
         self.language_code = language_code
@@ -43,7 +43,7 @@ struct Transcript {
 //        }
         return Transcript(
                             http_client: self.http_client,
-                            video_id: self.video_id,
+                            videoId: self.videoId,
                             url: String(format: "%@&tlang=%@", self.url, language_code),
                             language: language_code,
 //                            language: self.translation_languages_dict[language_code]!,//self._translation_languages_dict[language_code],

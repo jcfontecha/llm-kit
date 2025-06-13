@@ -15,7 +15,7 @@ public class RSSLoader: BaseLoader {
         self.url = url
         super.init(callbacks: callbacks)
     }
-    public override func _load() async throws  -> [Document] {
+    public override func loadDocuments() async throws  -> [Document] {
         let feedURL = URL(string: url)!
         let parser = FeedParser(URL: feedURL)
         let result = parser.parse()
@@ -27,19 +27,19 @@ public class RSSLoader: BaseLoader {
             case let .atom(feed):
                 var content = [Document]()
                 for f in feed.entries ?? [] {
-                    content.append(Document(page_content: f.title ?? "", metadata: [:]))
+                    content.append(Document(pageContent: f.title ?? "", metadata: [:]))
                 }
                 return content
             case let .rss(feed):
                 var content = [Document]()
                 for f in feed.items ?? [] {
-                    content.append(Document(page_content: f.title ?? "", metadata: [:]))
+                    content.append(Document(pageContent: f.title ?? "", metadata: [:]))
                 }
                 return content
             case let .json(feed):
                 var content = [Document]()
                 for f in feed.items ?? [] {
-                    content.append(Document(page_content: f.title ?? "", metadata: [:]))
+                    content.append(Document(pageContent: f.title ?? "", metadata: [:]))
                 }
                 return content
             }

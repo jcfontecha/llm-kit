@@ -13,7 +13,7 @@ public class TransformChain: DefaultChain {
         super.init(memory: memory, outputKey: outputKey, inputKey: inputKey, callbacks: callbacks)
     }
     let fn: (_ args: String) async -> LLMResult?
-    public override func _call(args: String) async -> (LLMResult?, Parsed) {
+    public override func execute(args: String) async -> (LLMResult?, Parsed) {
         return (await fn(args), Parsed.nothing)
     }
 }

@@ -12,21 +12,21 @@ import PDFKit
 
 
 public class PDFLoader: BaseLoader {
-    let file_path: URL
+    let filePath: URL
     
-    public init(file_path: URL, callbacks: [BaseCallbackHandler] = []) {
-        self.file_path = file_path
+    public init(filePath: URL, callbacks: [BaseCallbackHandler] = []) {
+        self.filePath = filePath
         super.init(callbacks: callbacks)
     }
     
-    public override func _load() async throws -> [Document] {
-//        let nameAndExt = self.file_path.split(separator: ".")
+    public override func loadDocuments() async throws -> [Document] {
+//        let nameAndExt = self.filePath.split(separator: ".")
 //        let name = "\(nameAndExt[0])"
 //        let ext = "\(nameAndExt[1])"
 //        if let url = Bundle.main.url(forResource: name, withExtension: ext) {
-        if let pdfDocument = PDFDocument(url: file_path) {
+        if let pdfDocument = PDFDocument(url: filePath) {
                 var extractedText = ""
-            let metadata = ["source": file_path.absoluteString]
+            let metadata = ["source": filePath.absoluteString]
                 for pageIndex in 0 ..< pdfDocument.pageCount {
                     if let pdfPage = pdfDocument.page(at: pageIndex) {
                         if let pageContent = pdfPage.attributedString {
@@ -39,7 +39,7 @@ public class PDFLoader: BaseLoader {
                 }
                 
     //            print(extractedText)
-                return [Document(page_content: extractedText, metadata: metadata)]
+                return [Document(pageContent: extractedText, metadata: metadata)]
             } else{
                 throw LLMKitError.LoaderError("Parse PDF file fail.")
             }

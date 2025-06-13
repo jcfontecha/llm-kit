@@ -12,14 +12,14 @@ import NIOPosix
 
 
 public class YoutubeLoader: BaseLoader {
-    let video_id: String
+    let videoId: String
     let language: String
-    public init(video_id: String, language: String, callbacks: [BaseCallbackHandler] = []) {
-        self.video_id = video_id
+    public init(videoId: String, language: String, callbacks: [BaseCallbackHandler] = []) {
+        self.videoId = videoId
         self.language = language
         super.init(callbacks: callbacks)
     }
-    public override func _load() async throws -> [Document] {
+    public override func loadDocuments() async throws -> [Document] {
         
         let eventLoopGroup = ThreadManager.thread
 
@@ -29,17 +29,17 @@ public class YoutubeLoader: BaseLoader {
             try? httpClient.syncShutdown()
         }
         
-        let info = await YoutubeHackClient.info(video_id: video_id, httpClient: httpClient)
-        let metadata = ["source": self.video_id,
+        let info = await YoutubeHackClient.info(videoId: videoId, httpClient: httpClient)
+        let metadata = ["source": self.videoId,
                         "title": info!.title,
                         "desc": info!.description,
                         "thumbnail": info!.thumbnail]
-        var transcript_list = await YoutubeHackClient.list_transcripts(video_id: self.video_id, httpClient: httpClient)
+        var transcript_list = await YoutubeHackClient.list_transcripts(videoId: self.videoId, httpClient: httpClient)
         if transcript_list == nil {
             throw LLMKitError.LoaderError("Subtitle not exist")
         }
         if transcript_list!.generated_transcripts.isEmpty && transcript_list!.manually_created_transcripts.isEmpty {
-//            return [Document(page_content: "Content is empty.", metadata: metadata)]
+//            return [Document(pageContent: "Content is empty.", metadata: metadata)]
             throw LLMKitError.LoaderError("Subtitle not exist")
         }
         var transcript = transcript_list!.find_transcript(language_codes: [self.language])
@@ -51,7 +51,7 @@ public class YoutubeLoader: BaseLoader {
         
         let text = transcript_pieces!.map {$0["text"]!}.joined(separator: " ")
         
-        return [Document(page_content: text, metadata: metadata)]
+        return [Document(pageContent: text, metadata: metadata)]
     
     }
     

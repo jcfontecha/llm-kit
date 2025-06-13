@@ -38,9 +38,9 @@ public class ParentDocumentRetriever: MultiVectorRetriever {
             let doc = parent_documents[i]
             let _id = doc_ids[i]
             let sub_docs = self.child_splitter.split_documents(documents: [doc])
-            let sub_docs__with_id = sub_docs.map{Document(page_content: $0.page_content, metadata: [self.id_key: _id])}
+            let sub_docs__with_id = sub_docs.map{Document(pageContent: $0.pageContent, metadata: [self.id_key: _id])}
             docs.append(contentsOf: sub_docs__with_id)
-            full_docs.append((_id, doc.page_content))
+            full_docs.append((_id, doc.pageContent))
         }
         print("🚀 Begin add sub document \(docs.count), main document \(full_docs.count)")
         await self.vectorstore.add_documents(documents: docs)
@@ -60,7 +60,7 @@ public class ParentDocumentRetriever: MultiVectorRetriever {
             all_sub_docs.append(contentsOf: sub_docs)
         }
         print("🚀 Begin remove sub document \(all_sub_docs.count), main document \(documents.count)")
-        await self.vectorstore.remove_documents(sha256s: all_sub_docs.map {sha256(str: $0.page_content)})
+        await self.vectorstore.remove_documents(sha256s: all_sub_docs.map {sha256(str: $0.pageContent)})
         print("🚀 End remove sub document \(all_sub_docs.count), main document \(documents.count)")
     }
     

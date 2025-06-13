@@ -7,21 +7,21 @@
 
 import Foundation
 public struct Document: Equatable {
-    public init(page_content: String, metadata: [String : String]) {
-        self.page_content = page_content
+    public init(pageContent: String, metadata: [String : String]) {
+        self.pageContent = pageContent
         self.metadata = metadata
     }
-    public let page_content: String
+    public let pageContent: String
     public var metadata: [String: String]
     public static func == (lhs: Document, rhs: Document) -> Bool {
-        return lhs.page_content == rhs.page_content
+        return lhs.pageContent == rhs.pageContent
     }
 }
 public class BaseLoader {
     
-    static let LOADER_TYPE_KEY = "loader_type"
-    static let LOADER_REQ_ID = "loader_req_id"
-    static let LOADER_COST_KEY = "cost"
+    static let loaderTypeKey = "loader_type"
+    static let loaderRequestId = "loader_req_id"
+    static let loaderCostKey = "cost"
     
     let callbacks: [BaseCallbackHandler]
     init(callbacks: [BaseCallbackHandler] = []) {
@@ -35,7 +35,7 @@ public class BaseLoader {
     func callStart(type: String, reqId: String) {
         do {
             for callback in callbacks {
-                try callback.on_loader_start(type: type, metadata: [BaseLoader.LOADER_REQ_ID: reqId, BaseLoader.LOADER_TYPE_KEY: type])
+                try callback.on_loader_start(type: type, metadata: [BaseLoader.loaderRequestId: reqId, BaseLoader.loaderTypeKey: type])
             }
         } catch {
             
@@ -45,7 +45,7 @@ public class BaseLoader {
     func callEnd(type: String, reqId: String, cost: Double) {
         do {
             for callback in callbacks {
-                try callback.on_loader_end(type: type, metadata: [BaseLoader.LOADER_REQ_ID: reqId, BaseLoader.LOADER_COST_KEY: "\(cost)", BaseLoader.LOADER_TYPE_KEY: type])
+                try callback.on_loader_end(type: type, metadata: [BaseLoader.loaderRequestId: reqId, BaseLoader.loaderCostKey: "\(cost)", BaseLoader.loaderTypeKey: type])
             }
         } catch {
             
@@ -55,7 +55,7 @@ public class BaseLoader {
     func callError(type: String, reqId: String, cause: String) {
         do {
             for callback in callbacks {
-                try callback.on_loader_error(type: type, cause: cause, metadata: [BaseLoader.LOADER_REQ_ID: reqId, BaseLoader.LOADER_TYPE_KEY: type])
+                try callback.on_loader_error(type: type, cause: cause, metadata: [BaseLoader.loaderRequestId: reqId, BaseLoader.loaderTypeKey: type])
             }
         } catch {
             
@@ -69,7 +69,7 @@ public class BaseLoader {
         let now = Date.now.timeIntervalSince1970
         do {
             callStart(type: type, reqId: reqId)
-            let docs = try await _load()
+            let docs = try await loadDocuments()
             cost = Date.now.timeIntervalSince1970 - now
             callEnd(type: type, reqId: reqId, cost: cost)
             return docs
@@ -83,7 +83,7 @@ public class BaseLoader {
         }
     }
     
-    func _load() async throws -> [Document] {
+    func loadDocuments() async throws -> [Document] {
         []
     }
     

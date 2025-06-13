@@ -23,7 +23,7 @@ public class MultiVectorRetriever: BaseRetriever {
             ids.append(d.metadata[self.id_key]!)
         }
         let docs = await self.docstore.mget(keys: ids)
-        return docs.map{Document(page_content: $0, metadata: [:])}
+        return docs.map{Document(pageContent: $0, metadata: [:])}
     }
     
 //    def _get_relevant_documents(

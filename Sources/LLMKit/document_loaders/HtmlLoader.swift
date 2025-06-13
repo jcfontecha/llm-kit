@@ -16,14 +16,14 @@ public class HtmlLoader: BaseLoader {
         super.init(callbacks: callbacks)
     }
     
-    public override func _load() async throws -> [Document] {
+    public override func loadDocuments() async throws -> [Document] {
         do {
             let doc: SwiftSoup.Document = try SwiftSoup.parse(html)
             let text = try doc.text()
             let title = findTitle(doc: doc)
             let thumbnail = findImage(text: html, doc: doc)
             let metadata: [String: String] = ["url": url, "title": title, "thumbnail": thumbnail]
-            return [Document(page_content: text, metadata: metadata)]
+            return [Document(pageContent: text, metadata: metadata)]
         } catch Exception.Error( _, let message) {
             print("Get body error " + message)
             throw LLMKitError.LoaderError("Parse html fail with \(message)")

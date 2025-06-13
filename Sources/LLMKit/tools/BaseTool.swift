@@ -14,12 +14,12 @@ public protocol Tool {
     // The unique name of the tool that clearly communicates its purpose.
     func description() -> String
     
-    func _run(args: String) async throws -> String
+    func execute(args: String) async throws -> String
 }
 public class BaseTool: NSObject, Tool {
-    static let TOOL_REQ_ID = "tool_req_id"
-    static let TOOL_COST_KEY = "cost"
-    static let TOOL_NAME_KEY = "tool_name"
+    static let toolRequestId = "tool_req_id"
+    static let toolCostKey = "cost"
+    static let toolNameKey = "toolName"
     let callbacks: [BaseCallbackHandler]
     init(callbacks: [BaseCallbackHandler] = []) {
         var cbs: [BaseCallbackHandler] = callbacks
@@ -32,7 +32,7 @@ public class BaseTool: NSObject, Tool {
     func callStart(tool: BaseTool, input: String, reqId: String) {
         do {
             for callback in callbacks {
-                try callback.on_tool_start(tool: tool, input: input, metadata: [BaseTool.TOOL_REQ_ID: reqId, BaseTool.TOOL_NAME_KEY: tool.name()])
+                try callback.on_tool_start(tool: tool, input: input, metadata: [BaseTool.toolRequestId: reqId, BaseTool.toolNameKey: tool.name()])
             }
         } catch {
             
@@ -42,7 +42,7 @@ public class BaseTool: NSObject, Tool {
     func callEnd(tool: BaseTool, output: String, reqId: String, cost: Double) {
         do {
             for callback in callbacks {
-                try callback.on_tool_end(tool: tool, output: output, metadata: [BaseTool.TOOL_REQ_ID: reqId, BaseTool.TOOL_COST_KEY: "\(cost)", BaseTool.TOOL_NAME_KEY: tool.name()])
+                try callback.on_tool_end(tool: tool, output: output, metadata: [BaseTool.toolRequestId: reqId, BaseTool.toolCostKey: "\(cost)", BaseTool.toolNameKey: tool.name()])
             }
         } catch {
             
@@ -57,7 +57,7 @@ public class BaseTool: NSObject, Tool {
         ""
     }
     
-    public func _run(args: String) async throws -> String {
+    public func execute(args: String) async throws -> String {
         ""
     }
     
@@ -66,7 +66,7 @@ public class BaseTool: NSObject, Tool {
         var cost = 0.0
         let now = Date.now.timeIntervalSince1970
         callStart(tool: self, input: args, reqId: reqId)
-        let result = try await _run(args: args)
+        let result = try await execute(args: args)
         cost = Date.now.timeIntervalSince1970 - now
         callEnd(tool: self, output: result, reqId: reqId, cost: cost)
         return result

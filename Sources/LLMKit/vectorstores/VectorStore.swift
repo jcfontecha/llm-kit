@@ -25,7 +25,7 @@ public class VectorStore {
     
     func add_documents(documents: [Document]) async {
         for document in documents {
-            await self.addText(text: document.page_content, metadata: document.metadata)
+            await self.addText(text: document.pageContent, metadata: document.metadata)
         }
     }
     
@@ -45,7 +45,7 @@ public class VectorStore {
 //              List[str]: List of IDs of the added texts.
 //          """
 //          # TODO: Handle the case where the user doesn't provide ids on the Collection
-//          texts = [doc.page_content for doc in documents]
+//          texts = [doc.pageContent for doc in documents]
 //          metadatas = [doc.metadata for doc in documents]
 //          return self.add_texts(texts, metadatas, **kwargs)
 }

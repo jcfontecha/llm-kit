@@ -19,7 +19,7 @@ public class Dummy: BaseTool {
         "Useful for test."
     }
     
-    public override func _run(args: String) async throws -> String {
+    public override func execute(args: String) async throws -> String {
         "Dummy test"
     }
     

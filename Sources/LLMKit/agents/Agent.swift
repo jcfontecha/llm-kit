@@ -51,7 +51,7 @@ public class AgentExecutor: DefaultChain {
 //                if isinstance(self.handle_parsing_errors, bool):
 //                    if e.send_to_llm:
 //                        observation = str(e.observation)
-//                        text = str(e.llm_output)
+//                        text = str(e.llmOutput)
 //                    else:
 //                        observation = "Invalid or incomplete response"
 //                elif isinstance(self.handle_parsing_errors, str):
@@ -127,14 +127,14 @@ public class AgentExecutor: DefaultChain {
                 return (step, observation)
             } catch {
                 print("\(error.localizedDescription) at run \(tool.name()) tool.")
-                let observation = try! await InvalidTool(tool_name: tool.name()).run(args: action.input)
+                let observation = try! await InvalidTool(toolName: tool.name()).run(args: action.input)
                 return (step, observation)
             }
         default:
             return (step, "fail")
         }
     }
-    public override func _call(args: String) async -> (LLMResult?, Parsed) {
+    public override func execute(args: String) async -> (LLMResult?, Parsed) {
         // chain run -> call -> agent plan -> llm send
         
         // while should_continue and call
@@ -168,7 +168,7 @@ public class AgentExecutor: DefaultChain {
                 } catch {
                     
                 }
-                return (LLMResult(llm_output: next_step_output.1), Parsed.str(next_step_output.1))
+                return (LLMResult(llmOutput: next_step_output.1), Parsed.str(next_step_output.1))
             case .action(let action):
                     do {
                 for callback in self.callbacks {
@@ -207,7 +207,7 @@ public class Agent {
 //                   prompt=prompt,
 //                   callback_manager=callback_manager,
 //               )
-//               tool_names = [tool.name for tool in tools]
+//               toolNames = [tool.name for tool in tools]
 //               _output_parser = output_parser or cls._get_default_output_parser()
     }
     
@@ -274,8 +274,8 @@ public class ZeroShotAgent: Agent {
         -> PromptTemplate
     {
         let tool_strings = tools.map{$0.name() + ":" + $0.description()}.joined(separator: "\n")
-        let tool_names = tools.map{$0.name()}.joined(separator: ", ")
-        let format_instructions2 = String(format: format_instructions, tool_names)
+        let toolNames = tools.map{$0.name()}.joined(separator: ", ")
+        let format_instructions2 = String(format: format_instructions, toolNames)
         let template = [prefix0, tool_strings, format_instructions2, suffix].joined(separator: "\n\n")
         return PromptTemplate(input_variables: ["question", "thought"], partial_variable: [:], template: template)
     }
@@ -301,8 +301,8 @@ public class ZeroShotAgent: Agent {
 //                    A PromptTemplate with the template assembled from the pieces here.
 //                """
 //                tool_strings = "\n".join([f"{tool.name}: {tool.description}" for tool in tools])
-//                tool_names = ", ".join([tool.name for tool in tools])
-//                format_instructions = format_instructions.format(tool_names=tool_names)
+//                toolNames = ", ".join([tool.name for tool in tools])
+//                format_instructions = format_instructions.format(toolNames=toolNames)
 //                template = "\n\n".join([prefix, tool_strings, format_instructions, suffix])
 //                if input_variables is None:
 //                    input_variables = ["input", "agent_scratchpad"]

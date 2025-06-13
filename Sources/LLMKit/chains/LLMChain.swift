@@ -23,15 +23,15 @@ public class LLMChain: DefaultChain {
     func create_outputs(output: LLMResult?) -> Parsed {
         if let output = output {
             if let parser = self.parser {
-                return parser.parse(text: output.llm_output!)
+                return parser.parse(text: output.llmOutput!)
             } else {
-                return Parsed.str(output.llm_output!)
+                return Parsed.str(output.llmOutput!)
             }
         } else {
             return Parsed.error
         }
     }
-    public override func _call(args: String) async -> (LLMResult?, Parsed) {
+    public override func execute(args: String) async -> (LLMResult?, Parsed) {
         // ["\\nObservation: ", "\\n\\tObservation: "]
         
         let llmResult = await generate(input_list: [inputKey: args])
@@ -68,11 +68,11 @@ public class LLMChain: DefaultChain {
     }
     
     public func predict(args: [String: String] ) async -> String? {
-        let inputAndContext = prep_inputs(inputs: args)
+        let inputAndContext = prepareInputs(inputs: args)
         let outputs = await self.generate(input_list: inputAndContext)
         if let o = outputs {
-            let _ = prep_outputs(inputs: args, outputs: [self.outputKey: o.llm_output!])
-            return o.llm_output!
+            let _ = prepareOutputs(inputs: args, outputs: [self.outputKey: o.llmOutput!])
+            return o.llmOutput!
         } else {
             return nil
         }

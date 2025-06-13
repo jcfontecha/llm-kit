@@ -75,7 +75,7 @@ public class LMStudio: LLM {
             let str = String(buffer: try await response.body.collect(upTo: 1024 * 1024))
             let data = str.data(using: .utf8)!
             let llmResponse = try! JSONDecoder().decode(LMStudioResponce.self, from: data)
-            return LLMResult(llm_output: llmResponse.choices.first!.message.content)
+            return LLMResult(llmOutput: llmResponse.choices.first!.message.content)
         } else {
             // handle remote error
             print("http code is not 200.")

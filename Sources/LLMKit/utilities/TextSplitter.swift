@@ -78,7 +78,7 @@ public class TextSplitter {
 //                 if self._add_start_index:
 //                     index = text.find(chunk, index + 1)
 //                     metadata["start_index"] = index
-//                 new_doc = Document(page_content=chunk, metadata=metadata)
+//                 new_doc = Document(pageContent=chunk, metadata=metadata)
 //                 documents.append(new_doc)
 //         return documents
 //
@@ -86,7 +86,7 @@ public class TextSplitter {
 //         """Split documents."""
 //         texts, metadatas = [], []
 //         for doc in documents:
-//             texts.append(doc.page_content)
+//             texts.append(doc.pageContent)
 //             metadatas.append(doc.metadata)
 //         return self.create_documents(texts, metadatas=metadatas)
     public func split_text(text: String) -> [String] {
@@ -95,8 +95,8 @@ public class TextSplitter {
     public func split_documents(documents: [Document]) -> [Document] {
         var new_documents: [Document] = []
         for doc in documents {
-            for chunk in self.split_text(text: doc.page_content){
-                let new_doc = Document(page_content: chunk, metadata: [:])
+            for chunk in self.split_text(text: doc.pageContent){
+                let new_doc = Document(pageContent: chunk, metadata: [:])
                 new_documents.append(new_doc)
             }
         }
@@ -273,7 +273,7 @@ public class RecursiveCharacterTextSplitter: TextSplitter {
 //                if self._add_start_index:
 //                    index = text.find(chunk, index + 1)
 //                    metadata["start_index"] = index
-//                new_doc = Document(page_content=chunk, metadata=metadata)
+//                new_doc = Document(pageContent=chunk, metadata=metadata)
 //                documents.append(new_doc)
 //        return documents
 //
@@ -281,7 +281,7 @@ public class RecursiveCharacterTextSplitter: TextSplitter {
 //        """Split documents."""
 //        texts, metadatas = [], []
 //        for doc in documents:
-//            texts.append(doc.page_content)
+//            texts.append(doc.pageContent)
 //            metadatas.append(doc.metadata)
 //        return self.create_documents(texts, metadatas=metadatas)
 //

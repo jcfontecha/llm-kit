@@ -30,7 +30,7 @@ public class GetLocationTool: BaseTool, CLLocationManagerDelegate {
 """
     }
     
-    public override func _run(args: String) async throws -> String {
+    public override func execute(args: String) async throws -> String {
         
         locationManager.requestLocation()
         //wait

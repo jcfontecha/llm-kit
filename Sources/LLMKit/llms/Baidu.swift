@@ -28,10 +28,10 @@ public class Baidu: LLM {
         let env = LC.loadEnv()
         if let ak = env["BAIDU_LLM_AK"],
            let sk = env["BAIDU_LLM_SK"]{
-            return LLMResult(llm_output: try await BaiduClient.llmSync(ak: ak, sk: sk, httpClient: httpClient, text: text, temperature: temperature))
+            return LLMResult(llmOutput: try await BaiduClient.llmSync(ak: ak, sk: sk, httpClient: httpClient, text: text, temperature: temperature))
         } else {
             print("Please set baidu llm ak sk.")
-            return LLMResult(llm_output: "Please set baidu llm ak sk.")
+            return LLMResult(llmOutput: "Please set baidu llm ak sk.")
         }
     }
     

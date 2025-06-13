@@ -26,10 +26,10 @@ public class Llama2: LLM {
         
         if let apiKey = env["LLAMA2_API_KEY"] {
             let responce = await LlamaAPIWrapper().execute(text: text, key: apiKey, temperature: self.temperature, max_tokens: 2048, topP: 1.0, n: 1, stops: [])
-            return LLMResult(llm_output: responce)
+            return LLMResult(llmOutput: responce)
         } else {
             print("Please set llama2 api key.")
-            return LLMResult(llm_output: "Please set llama2 api key.")
+            return LLMResult(llmOutput: "Please set llama2 api key.")
         }
         
     }

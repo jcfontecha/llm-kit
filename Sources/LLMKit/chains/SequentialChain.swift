@@ -14,12 +14,12 @@ public class SequentialChain: DefaultChain {
     }
     public func predict(args: String) async throws -> [String: String] {
         var result: [String: String] = [:]
-        var input: LLMResult? = LLMResult(llm_output: args)
+        var input: LLMResult? = LLMResult(llmOutput: args)
         for chain in self.chains {
 //            assert(chain.outputKey != nil, "chain.outputKey must not be nil")
             if input != nil {
-                input = await chain._call(args: input!.llm_output!).0
-                result.updateValue(input!.llm_output!, forKey: chain.outputKey)
+                input = await chain.execute(args: input!.llmOutput!).0
+                result.updateValue(input!.llmOutput!, forKey: chain.outputKey)
             } else {
                 print("A chain of SequentialChain fail")
             }

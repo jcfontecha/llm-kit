@@ -30,19 +30,19 @@ public class LLM {
         do {
             if let cache = self.cache {
                 if let llmResult = await cache.lookup(prompt: text) {
-                    callEnd(output: llmResult.llm_output!, reqId: reqId, cost: 0)
+                    callEnd(output: llmResult.llmOutput!, reqId: reqId, cost: 0)
                     return llmResult
                 }
             }
             let llmResult = try await _send(text: text, stops: stops)
             if let cache = self.cache {
-                if llmResult.llm_output != nil {
+                if llmResult.llmOutput != nil {
                     await cache.update(prompt: text, return_val: llmResult)
                 }
             }
             cost = Date.now.timeIntervalSince1970 - now
             if !llmResult.stream {
-                callEnd(output: llmResult.llm_output!, reqId: reqId, cost: cost)
+                callEnd(output: llmResult.llmOutput!, reqId: reqId, cost: cost)
             } else {
                 callEnd(output: "[LLM is streamable]", reqId: reqId, cost: cost)
             }

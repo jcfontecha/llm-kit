@@ -8,21 +8,21 @@
 import Foundation
 
 public class TextLoader: BaseLoader {
-    let file_path: String
+    let filePath: String
     
-    public init(file_path: String, callbacks: [BaseCallbackHandler] = []) {
-        self.file_path = file_path
+    public init(filePath: String, callbacks: [BaseCallbackHandler] = []) {
+        self.filePath = filePath
         super.init(callbacks: callbacks)
     }
-    public override func _load() async throws  -> [Document] {
-        let nameAndExt = self.file_path.split(separator: ".")
+    public override func loadDocuments() async throws  -> [Document] {
+        let nameAndExt = self.filePath.split(separator: ".")
         let name = "\(nameAndExt[0])"
         let ext = "\(nameAndExt[1])"
         var text = ""
         if let res = Bundle.main.path(forResource: name, ofType: ext){
             text = try String(contentsOfFile: res)
-            let metadata = ["source": self.file_path]
-            return [Document(page_content: text, metadata: metadata)]
+            let metadata = ["source": self.filePath]
+            return [Document(pageContent: text, metadata: metadata)]
         } else {
             throw LLMKitError.LoaderError("Text fail not exist")
         }
@@ -37,7 +37,7 @@ public class TextLoader: BaseLoader {
 //
 //
 //    Args:
-//        file_path: Path to the file to load.
+//        filePath: Path to the file to load.
 //
 //        encoding: File encoding to use. If `None`, the file will be loaded
 //        with the default system encoding.
@@ -48,12 +48,12 @@ public class TextLoader: BaseLoader {
 //
 //    def __init__(
 //        self,
-//        file_path: str,
+//        filePath: str,
 //        encoding: Optional[str] = None,
 //        autodetect_encoding: bool = False,
 //    ):
 //        """Initialize with file path."""
-//        self.file_path = file_path
+//        self.filePath = filePath
 //        self.encoding = encoding
 //        self.autodetect_encoding = autodetect_encoding
 //
@@ -61,23 +61,23 @@ public class TextLoader: BaseLoader {
 //        """Load from file path."""
 //        text = ""
 //        try:
-//            with open(self.file_path, encoding=self.encoding) as f:
+//            with open(self.filePath, encoding=self.encoding) as f:
 //                text = f.read()
 //        except UnicodeDecodeError as e:
 //            if self.autodetect_encoding:
-//                detected_encodings = detect_file_encodings(self.file_path)
+//                detected_encodings = detect_file_encodings(self.filePath)
 //                for encoding in detected_encodings:
 //                    logger.debug("Trying encoding: ", encoding.encoding)
 //                    try:
-//                        with open(self.file_path, encoding=encoding.encoding) as f:
+//                        with open(self.filePath, encoding=encoding.encoding) as f:
 //                            text = f.read()
 //                        break
 //                    except UnicodeDecodeError:
 //                        continue
 //            else:
-//                raise RuntimeError(f"Error loading {self.file_path}") from e
+//                raise RuntimeError(f"Error loading {self.filePath}") from e
 //        except Exception as e:
-//            raise RuntimeError(f"Error loading {self.file_path}") from e
+//            raise RuntimeError(f"Error loading {self.filePath}") from e
 //
-//        metadata = {"source": self.file_path}
-//        return [Document(page_content=text, metadata=metadata)]
+//        metadata = {"source": self.filePath}
+//        return [Document(pageContent=text, metadata=metadata)]

@@ -10,12 +10,12 @@ import OpenAIKit
 // TODO - remove OpenAIKit
 
 public class LLMResult {
-    init(llm_output: String? = nil, stream: Bool = false) {
-        self.llm_output = llm_output
+    init(llmOutput: String? = nil, stream: Bool = false) {
+        self.llmOutput = llmOutput
         self.stream = stream
     }
     
-    public var llm_output: String?
+    public var llmOutput: String?
     
     public var stream: Bool
     
@@ -30,17 +30,17 @@ public class LLMResult {
 public class OpenAIResult: LLMResult {
     public let generation: AsyncThrowingStream<ChatStream, Error>?
 
-    init(generation: AsyncThrowingStream<ChatStream, Error>? = nil, llm_output: String? = nil) {
+    init(generation: AsyncThrowingStream<ChatStream, Error>? = nil, llmOutput: String? = nil) {
         self.generation = generation
-        super.init(llm_output: llm_output, stream: generation != nil && llm_output == nil)
+        super.init(llmOutput: llmOutput, stream: generation != nil && llmOutput == nil)
     }
     
     public override func setOutput() async throws {
         if stream {
-            llm_output = ""
+            llmOutput = ""
             for try await c in generation! {
                 if let message = c.choices.first?.delta.content {
-                    llm_output! += message
+                    llmOutput! += message
                 }
             }
         }
